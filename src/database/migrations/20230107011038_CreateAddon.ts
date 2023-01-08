@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<void> {
         table.decimal('price').notNullable()
         table.string('category')
         table.integer('brand_id').unsigned().references('id').inTable('brands').notNullable()
-        table.timestamps()
+        table.timestamps(false, true)
     })
 }
 

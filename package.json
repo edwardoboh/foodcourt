@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "knex": "knex --knexfile knexfile.ts",
     "migrate": "npm run knex migrate:latest",
+    "migrate:list": "npm run knex migrate:list --migrations-directory ./src/database/migrations",
     "migrate:make": "npm run knex migrate:make -- -x ts --migrations-directory ./src/database/migrations"
   },
   "dependencies": {
@@ -27,6 +28,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
+    "@willsoto/nestjs-objection": "^8.1.0",
     "dotenv": "^16.0.3",
     "glob": "^8.0.3",
     "knex": "^2.4.0",
