@@ -62,17 +62,29 @@ export class BrandService {
 
   async createCategory({brandId, payload}): Promise<any> {
     try{
-      return this.category.query().insert({brand_id: brandId, ...payload}).returning('*')
+      const category = await this.category.query().insert({brand_id: brandId, ...payload}).returning('*')
+      return category
     }catch(error){
-      throw new HttpException(failed('Error while creating addon'), HttpStatus.INTERNAL_SERVER_ERROR)
+      if(error.name == 'UniqueViolationError' && error.nativeError.code == '23505') throw new HttpException(`Category with name ${payload?.name} already exists`, HttpStatus.BAD_REQUEST)
+      throw new HttpException(failed('Error while creating category'), HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+  }
+
+  async geCategory(brandId: number, name: string): Promise<any> {
+    try{
+      const category = await this.category.query().where({brand_id: brandId, name})
+      return category;
+    }catch(error){
+      throw new HttpException(failed('Error while fetching category'), HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 
   async fetchCategories(brandId: number): Promise<any> {
     try{
-      return this.category.query().where({brand_id: brandId})
+      const categories = await this.category.query().where({brand_id: brandId})
+      return categories;
     }catch(error){
-      throw new HttpException(failed('Error while creating addon'), HttpStatus.INTERNAL_SERVER_ERROR)
+      throw new HttpException(failed('Error while fetching all categories'), HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 
