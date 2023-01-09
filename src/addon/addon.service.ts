@@ -8,8 +8,10 @@ export class AddonService {
 
     async create({brandId, payload}): Promise<any> {
         try{
-            return this.addon.query().insert({brand_id: brandId, ...payload}).returning('*')
+            const addon = await this.addon.query().insert({brand_id: brandId, ...payload}).returning('*')
+            return addon
         }catch(error){
+            if(error.name == 'UniqueViolationError' && error.nativeError.code == '23505') throw new HttpException(`Addon with name: "${payload?.name}" already exists`, HttpStatus.BAD_REQUEST)
             throw new HttpException(failed("An error occured"), HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }

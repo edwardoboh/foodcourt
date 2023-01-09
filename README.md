@@ -35,10 +35,10 @@ $ yarn run start:prod
 
 #### **Submission Links**
 
-- Postman Documentation: [Click Here]()
-- API Production Link: []()
+- Postman Documentation: [Click Here](https://documenter.getpostman.com/view/17453703/2s8Z75SpdA)
+- API Production Link: [AWS EC2](http://44.204.25.93:3000)
 - Github Repository: [edwardoboh/foodcourt](https://github.com/edwardoboh/foodcourt)
-- Google Drive Link: [Google Drive]()
+- Google Drive Link: [Google Drive]() 
 
 ---
 
@@ -51,7 +51,7 @@ which required that i build an API in Nestjs that allow it's admin users perform
 - update addons
 - delete addons
 - create addon category
-
+ 
 
 The following sections give more details into the API and the various design choices that were made.
 

@@ -1,6 +1,5 @@
 import { Inject, Injectable, HttpException, HttpStatus, BadRequestException } from "@nestjs/common";
 import UserModel from "src/database/models/user.model";
-import { UniqueViolationError } from 'objection'
 import { CreateUserDto, UpdateUserDto } from "./dto";
 import { failed } from "src/common/dto";
 

@@ -3,11 +3,12 @@ import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
 import BrandModel from 'src/database/models/brand.model'
 import { failed } from 'src/common/dto';
+import CategoryModel from 'src/database/models/category.model';
 
 @Injectable()
 export class BrandService {
 
-  constructor(@Inject(BrandModel) private readonly brand: typeof BrandModel) {}
+  constructor(@Inject(BrandModel) private readonly brand: typeof BrandModel, @Inject(CategoryModel) private readonly category: typeof CategoryModel) {}
 
   async create(createBrandDto: CreateBrandDto) {
     try{
@@ -41,7 +42,7 @@ export class BrandService {
 
   async update(id: number, updateBrandDto: UpdateBrandDto) {
     try{
-      const updatedBrand = await this.brand.query().update(updateBrandDto).where({id})
+      const updatedBrand = await this.brand.query().update(updateBrandDto).where({id}).returning('*')
       return updatedBrand;
     }catch(error){
       throw new HttpException(failed("Error updating brand"), HttpStatus.INTERNAL_SERVER_ERROR)
@@ -56,4 +57,23 @@ export class BrandService {
       throw new HttpException(failed("Error deleting brand"), HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
+
+  // TODO - We can split category features into it's own module later
+
+  async createCategory({brandId, payload}): Promise<any> {
+    try{
+      return this.category.query().insert({brand_id: brandId, ...payload}).returning('*')
+    }catch(error){
+      throw new HttpException(failed('Error while creating addon'), HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+  }
+
+  async fetchCategories(brandId: number): Promise<any> {
+    try{
+      return this.category.query().where({brand_id: brandId})
+    }catch(error){
+      throw new HttpException(failed('Error while creating addon'), HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+  }
+
 }

@@ -4,6 +4,7 @@ import AddonModel from './models/addon.model';
 import BrandModel from './models/brand.model';
 import BaseModel from './models/base.model';
 import UserModel from './models/user.model';
+import CategoryModel from './models/category.model';
 import { ObjectionModule } from '@willsoto/nestjs-objection'
 
 @Global()
@@ -29,7 +30,7 @@ import { ObjectionModule } from '@willsoto/nestjs-objection'
                 }
             }
         }),
-        ObjectionModule.forFeature([AddonModel, BrandModel, UserModel])
+        ObjectionModule.forFeature([AddonModel, BrandModel, UserModel, CategoryModel])
     ],
     exports: [ObjectionModule]
 })
