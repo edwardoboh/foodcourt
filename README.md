@@ -69,9 +69,11 @@ There exists a DNS server that routes user request to our system, a Load Balance
 The database system used here is Postgres database, running on AWS RDS.
 
 ## **Design Assumptions**
-
+Below are some of the assumptions made while designing the features and functionality of this API: 
 
 ## **Database Models**
+This section describes the various tables inwhich data is stored and the relationship between them. Below an image showing the tables.
+![Database Schema](https://res.cloudinary.com/class-attend/image/upload/v1673267061/db_smswwj.png)
 
 
 ## **Deployment Infrastructure**
@@ -81,7 +83,10 @@ Database:
 API Server:
 **AWS EC2** instance running Ubuntu Linux
 
+Documentation:
+**Postman**. Check above for link to the Postman collection
+
 ## **APENDIX**
 ### **Project Folder Structure**
+![Folder Structure](https://res.cloudinary.com/class-attend/image/upload/v1673267316/folder_structure_dnybvs.png)
 
-## **Note:**
